@@ -35,7 +35,7 @@ private:
     Noeud*  instSi();      //      <instSi> ::= si ( <expression> ) <seqInst> finsi
     Noeud*  instTantQue(); //     <tantQue> ::= tantque(<expression>) <seqInst> fintantque
     Noeud*  instRepeter(); //     <repeter> ::= repeter <seqInst> jusqua( <expression> )
-
+    Noeud*  instPour();    //        <pour> ::= pour([<affectation>];<expression>;[<affectation>]) <seqInst> finpour
 
     // outils pour simplifier l'analyse syntaxique
     void tester (const string & symboleAttendu) const throw (SyntaxeException);   // Si symbole courant != symboleAttendu, on lève une exception

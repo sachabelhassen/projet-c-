@@ -165,5 +165,21 @@ Noeud* Interpreteur::instRepeter() {
     testerEtAvancer("(");
     Noeud* condition = expression(); // On mémorise la condition
     testerEtAvancer(")");
-    return new NoeudInstTantQue(condition, sequence);
+    return new NoeudInstRepeter(condition, sequence);
+}
+
+Noeud* Interpreteur::instPour() {
+    //<repeter> ::= repeter <seqInst> jusqua( <expression> )    
+    testerEtAvancer("pour");
+    testerEtAvancer("(");
+    Noeud* affectation = affectation(); // On mémorise l'affectation
+    testerEtAvancer(";");
+    Noeud* condition = expression(); // On mémorise la condition
+    testerEtAvancer(";");
+    Noeud* action = affectation(); // On mémorise l'action de fin de boucle
+    testerEtAvancer(")");
+    Noeud* sequence = seqInst();
+    testerEtAvancer("finpour");
+
+    return nullptr;
 }
