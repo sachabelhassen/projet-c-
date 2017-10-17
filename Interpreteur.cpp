@@ -172,7 +172,7 @@ Noeud* Interpreteur::instPour() {
     //<repeter> ::= repeter <seqInst> jusqua( <expression> )    
     testerEtAvancer("pour");
     testerEtAvancer("(");
-    Noeud* affectation = affectation(); // On mémorise l'affectation
+    Noeud* affecter = affectation(); // On mémorise l'affectation
     testerEtAvancer(";");
     Noeud* condition = expression(); // On mémorise la condition
     testerEtAvancer(";");
