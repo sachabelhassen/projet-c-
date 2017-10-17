@@ -56,7 +56,7 @@ Noeud* Interpreteur::seqInst() {
     NoeudSeqInst* sequence = new NoeudSeqInst();
     do {
         sequence->ajoute(inst());
-    } while (m_lecteur.getSymbole() == "<VARIABLE>" 
+    } while (m_lecteur.getSymbole() == "<VARIABLE>"
             || m_lecteur.getSymbole() == "si"
             || m_lecteur.getSymbole() == "tantque"
             || m_lecteur.getSymbole() == "repeter");
@@ -71,17 +71,16 @@ Noeud* Interpreteur::inst() {
         Noeud *affect = affectation();
         testerEtAvancer(";");
         return affect;
-    } else if (m_lecteur.getSymbole() == "si"){
+    } else if (m_lecteur.getSymbole() == "si") {
         return instSi();
         // Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
-    } else if (m_lecteur.getSymbole() == "tantque"){
+    } else if (m_lecteur.getSymbole() == "tantque") {
         return instTantQue();
-    } else if (m_lecteur.getSymbole() == "repeter"){
+    } else if (m_lecteur.getSymbole() == "repeter") {
         Noeud *repeter = instRepeter();
         testerEtAvancer(";");
         return repeter;
-    }
-    else erreur("Instruction incorrecte");
+    } else erreur("Instruction incorrecte");
 }
 
 Noeud* Interpreteur::affectation() {

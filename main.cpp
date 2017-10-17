@@ -29,3 +29,29 @@ int main(int argc, char* argv[]) {
   }
   return 0;
 }
+
+/*
+//.cpp
+Noeud* Interpreteur::instEcrire() {
+    //       <instEcrire>  ::= ecrire( <expression> | <chaine> {, <expression> | <chaine> })
+    testerEtAvancer("ecrire");
+    testerEtAvancer("(");
+    if (m_lecteur.getSymbole() == "<CHAINE>")
+        m_lecteur.avancer();
+    else
+        expression();
+    while (m_lecteur.getSymbole() == ",") {
+        testerEtAvancer(",");
+        if (m_lecteur.getSymbole() == "<CHAINE>")
+            m_lecteur.avancer();
+        else
+            expression();
+    }
+    testerEtAvancer(")");
+}
+*/
+/*
+ .h
+ Noeud*  instEcrire();  //       <instEcrire>  ::= ecrire( <expression> | <chaine> {, <expression> | <chaine> })
+
+ */
