@@ -97,16 +97,13 @@ int NoeudInstTantQue::executer() {
 // NoeudRepeter
 ////////////////////////////////////////////////////////////////////////////////
 
-NoeudInstRepeter::NoeudInstRepeter(Noeud* condition, Noeud* sequence)
+NoeudInstRepeter::NoeudInstRepeter(Noeud* sequence, Noeud* condition)
 : m_condition(condition), m_sequence(sequence) {
-
 }
 
 int NoeudInstRepeter::executer() {
     do{
-
-        m_sequence->executer();
-
+    m_sequence->executer();
     }while (!(m_condition->executer()));
     return 0; // La valeur renvoyée ne représente rien !
 }
