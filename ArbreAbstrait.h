@@ -110,6 +110,18 @@ class NoeudInstRepeter: public Noeud {
     Noeud*  m_condition;
     Noeud*  m_sequence;
 };
+class NoeudInstEcrire: public Noeud {
+// Classe pour représenter un noeud "instruction repeter"
+//  et ses 2 fils : la séquence d'instruction a repeter et la condition de sortie
+  public:
+    NoeudInstEcrire(Noeud* condition, Noeud* sequence);
+     // Construit une "instruction tantque" avec sa condition et sa séquence d'instruction
+    ~NoeudInstRepeter() {} // A cause du destructeur virtuel de la classe Noeud
+    int executer();  // Exécute l'instruction tantque : tantque condition vraie on exécute la séquence
 
+  private:
+    Noeud*  m_condition;
+    Noeud*  m_sequence;
+};
 
 #endif /* ARBREABSTRAIT_H */
