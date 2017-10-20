@@ -182,3 +182,20 @@ Noeud* Interpreteur::instPour() {
 
     return nullptr;
 }
+Noeud* Interpreteur::instEcrire() {
+    //       <instEcrire>  ::= ecrire( <expression> | <chaine> {, <expression> | <chaine> })
+    testerEtAvancer("ecrire");
+    testerEtAvancer("(");
+    if (m_lecteur.getSymbole() == "<CHAINE>")
+        m_lecteur.avancer();
+    else
+        expression();
+    while (m_lecteur.getSymbole() == ",") {
+        testerEtAvancer(",");
+        if (m_lecteur.getSymbole() == "<CHAINE>")
+            m_lecteur.avancer();
+        else
+            expression();
+    }
+    testerEtAvancer(")");
+}
