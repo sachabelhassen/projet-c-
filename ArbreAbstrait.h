@@ -112,17 +112,35 @@ class NoeudInstRepeter: public Noeud {
 };
 ////////////////////////////////////////////////////////////////////////////////
 class NoeudInstEcrire: public Noeud {
-// Classe pour représenter un noeud "instruction repeter"
-//  et ses 2 fils : la séquence d'instruction a repeter et la condition de sortie
+// Classe pour représenter un noeud "instruction ecrire"
+//    <instEcrire>  ::= ecrire( <expression> | <chaine> {, <expression> | <chaine> })
+
   public:
     NoeudInstEcrire(Noeud* condition, Noeud* sequence);
-     // Construit une "instruction tantque" avec sa condition et sa séquence d'instruction
-    ~NoeudInstRepeter() {} // A cause du destructeur virtuel de la classe Noeud
-    int executer();  // Exécute l'instruction tantque : tantque condition vraie on exécute la séquence
+     // Construit une "instruction ecrire" avec sa condition et sa séquence d'instruction
+    ~NoeudInstEccrire() {} // A cause du destructeur virtuel de la classe Noeud
+    
+    int executer();  // Exécute l'instruction ecrire
+    
 
   private:
-    Noeud*  m_condition;
-    Noeud*  m_sequence;
-};
 
+};
+////////////////////////////////////////////////////////////////////////////////
+class NoeudInstSiRiche: public Noeud {
+// Classe pour représenter un noeud "instruction ecrire"
+//    <instEcrire>  ::= ecrire( <expression> | <chaine> {, <expression> | <chaine> })
+
+  public:
+    NoeudInstSiRiche(Noeud* condition, Noeud* sequence);
+     // Construit une "instruction ecrire" avec sa condition et sa séquence d'instruction
+    ~NoeudInstSiRiche() {} // A cause du destructeur virtuel de la classe Noeud
+    void ajouter(Noeud* instruction);
+    int executer();  // Exécute l'instruction ecrire
+    
+
+  private:
+      vector<Noeud*> m_vecteurConditonInstruction;
+
+};
 #endif /* ARBREABSTRAIT_H */

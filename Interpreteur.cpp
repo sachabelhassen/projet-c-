@@ -231,7 +231,6 @@ Noeud* Interpreteur::instLire() {
     while (m_lecteur.getSymbole() == ",") {
         testerEtAvancer(",");
         Noeud* variable = variable();
-
     }
 }
 
