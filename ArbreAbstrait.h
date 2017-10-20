@@ -110,6 +110,7 @@ class NoeudInstRepeter: public Noeud {
     Noeud*  m_condition;
     Noeud*  m_sequence;
 };
+////////////////////////////////////////////////////////////////////////////////
 class NoeudInstEcrire: public Noeud {
 // Classe pour représenter un noeud "instruction repeter"
 //  et ses 2 fils : la séquence d'instruction a repeter et la condition de sortie
