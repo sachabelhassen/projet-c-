@@ -182,6 +182,7 @@ Noeud* Interpreteur::instPour() {
 
     return nullptr;
 }
+
 Noeud* Interpreteur::instEcrire() {
     //       <instEcrire>  ::= ecrire( <expression> | <chaine> {, <expression> | <chaine> })
     testerEtAvancer("ecrire");
@@ -207,18 +208,30 @@ Noeud* Interpreteur::instSiRiche() {
     Noeud* condition = expression();
     testerEtAvancer(")");
     Noeud* sequence = seqInst();
-    while(m_lecteur.getSymbole()=="sinonsi"){
+    while (m_lecteur.getSymbole() == "sinonsi") {
         testerEtAvancer("sinonsi");
         testerEtAvancer("(");
         Noeud* conditionSinonSi = expression();
         testerEtAvancer(")");
         Noeud* sequenceSinonSi = seqInst();
     }
-    if (m_lecteur.getSymbole()=="sinon"){
+    if (m_lecteur.getSymbole() == "sinon") {
         testerEtAvancer("sinon");
         Noeud* sequenceSinon = seqInst();
     }
     testerEtAvancer("finsi");
 }
 
-    
+Noeud* Interpreteur::instLire() {
+    //  <instLire>  ::= lire( <variable> {, <variable> })
+    testerEtAvancer("lire");
+    testerEtAvancer("(");
+    Noeud* variable = variable();
+    testerEtAvancer(")");
+    while (m_lecteur.getSymbole() == ",") {
+        testerEtAvancer(",");
+        Noeud* variable = variable();
+
+    }
+}
+
