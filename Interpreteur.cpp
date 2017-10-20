@@ -199,3 +199,5 @@ Noeud* Interpreteur::instEcrire() {
     }
     testerEtAvancer(")");
 }
+
+    //  <instSiRiche> ::=si(<expression>) <seqInst> {sinonsi(<expression>) <seqInst> }[sinon <seqInst>]finsi
