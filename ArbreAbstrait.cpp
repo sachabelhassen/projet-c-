@@ -127,3 +127,4 @@ void NoeudInstSiRiche::ajouter(Noeud* instruction) {
     if (i < fin) m_vecteurConditonInstruction[i + 1]->executer();
     else if (nb % 2) m_vecteurConditonInstruction[nb - 1]->executer();
     return 0;
+ }
