@@ -102,9 +102,9 @@ NoeudInstRepeter::NoeudInstRepeter(Noeud* sequence, Noeud* condition)
 }
 
 int NoeudInstRepeter::executer() {
-    do{
-    m_sequence->executer();
-    }while (!(m_condition->executer()));
+    do {
+        m_sequence->executer();
+    } while (!(m_condition->executer()));
     return 0; // La valeur renvoyée ne représente rien !
 }
 
@@ -112,19 +112,31 @@ int NoeudInstRepeter::executer() {
 // NoeudEcrire
 ////////////////////////////////////////////////////////////////////////////////
 
+NoeudInstEcrire::NoeudInstEcrire(){}
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudSiRiche
+////////////////////////////////////////////////////////////////////////////////
+NoeudInstSiRiche::NoeudInstSiRiche() {
+
+}
+
 void NoeudInstSiRiche::ajouter(Noeud* instruction) {
     m_vecteurConditonInstruction.push_back(instruction);
 }
 
-
- int NoeudInstSiRiche::executer() {
+int NoeudInstSiRiche::executer() {
     int nb = m_vecteurConditonInstruction.size();
     int fin = nb % 2 ? nb - 2 : nb - 1;
     int i = 0;
     // on recherche la premiere condition vraie
     while (i < fin && !m_vecteurConditonInstruction[i]->executer())
         i++;
-    if (i < fin) m_vecteurConditonInstruction[i + 1]->executer();
-    else if (nb % 2) m_vecteurConditonInstruction[nb - 1]->executer();
+    if (i < fin)
+        m_vecteurConditonInstruction[i + 1]->executer();
+    else if (nb % 2)
+        m_vecteurConditonInstruction[nb - 1]->executer();
     return 0;
- }
+}

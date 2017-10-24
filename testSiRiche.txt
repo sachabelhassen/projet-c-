@@ -1,1 +1,13 @@
 
+procedure principale()
+    i = 11;
+    si (i==12)
+        i=100;
+    sinonsi(i==11)
+        i=200;
+    sinonsi(i==13)
+        i=300;
+    sinon 
+        i=0;
+    finsi
+finproc

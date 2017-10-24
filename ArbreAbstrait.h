@@ -116,9 +116,9 @@ class NoeudInstEcrire: public Noeud {
 //    <instEcrire>  ::= ecrire( <expression> | <chaine> {, <expression> | <chaine> })
 
   public:
-    NoeudInstEcrire(Noeud* condition, Noeud* sequence);
+    NoeudInstEcrire();
      // Construit une "instruction ecrire" avec sa condition et sa séquence d'instruction
-    ~NoeudInstEccrire() {} // A cause du destructeur virtuel de la classe Noeud
+    ~NoeudInstEcrire() {} // A cause du destructeur virtuel de la classe Noeud
     
     int executer();  // Exécute l'instruction ecrire
     
@@ -132,7 +132,7 @@ class NoeudInstSiRiche: public Noeud {
 //    <instEcrire>  ::= ecrire( <expression> | <chaine> {, <expression> | <chaine> })
 
   public:
-    NoeudInstSiRiche(Noeud* condition, Noeud* sequence);
+    NoeudInstSiRiche();
      // Construit une "instruction ecrire" avec sa condition et sa séquence d'instruction
     ~NoeudInstSiRiche() {} // A cause du destructeur virtuel de la classe Noeud
     void ajouter(Noeud* instruction);
