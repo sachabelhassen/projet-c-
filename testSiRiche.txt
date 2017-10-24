@@ -1,6 +1,6 @@
 
 procedure principale()
-    i = 11;
+    i = 13;
     si (i==12)
         i=100;
     sinonsi(i==11)

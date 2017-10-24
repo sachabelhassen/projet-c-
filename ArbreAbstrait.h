@@ -118,7 +118,7 @@ class NoeudInstEcrire: public Noeud {
   public:
     NoeudInstEcrire();
      // Construit une "instruction ecrire" avec sa condition et sa séquence d'instruction
-    ~NoeudInstEcrire() {} // A cause du destructeur virtuel de la classe Noeud
+    ~NoeudInstEcrire(); // A cause du destructeur virtuel de la classe Noeud
     
     int executer();  // Exécute l'instruction ecrire
     
