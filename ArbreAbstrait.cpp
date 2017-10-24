@@ -123,6 +123,11 @@ int NoeudInstEcrire::executer() {
 
 }
 
+void NoeudInstEcrire::ajouter(Noeud* instruction) {
+    m_vecteurEcrire.push_back(instruction);
+}
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudSiRiche
