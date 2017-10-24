@@ -185,20 +185,25 @@ Noeud* Interpreteur::instPour() {
 
 Noeud* Interpreteur::instEcrire() {
     //       <instEcrire>  ::= ecrire( <expression> | <chaine> {, <expression> | <chaine> })
-    NoeudInstEcrire* instEcrire = new NoeudInstEcrire();
+    Noeud* instEcrire = nullptr;
     testerEtAvancer("ecrire");
     testerEtAvancer("(");
-    if (m_lecteur.getSymbole() == "<CHAINE>")
-        m_lecteur.avancer();
-    else
+    if (expression()) {
         instEcrire->ajoute(expression());
-    while (m_lecteur.getSymbole() == ",") {
-        testerEtAvancer(",");
-        if (m_lecteur.getSymbole() == "<CHAINE>")
-            m_lecteur.avancer();
-        else
-            instEcrire->ajoute(expression());
+    } else if (m_lecteur.getSymbole() == "<CHAINE>") {
+        instEcrire = m_table.chercheAjoute(m_lecteur.getSymbole()); // on ajoute la chaine à la table
+        m_lecteur.avancer();
     }
+
+    while (m_lecteur.getSymbole() == ",") {
+        if (expression()) {
+            instEcrire->ajoute(expression());
+        } else if (m_lecteur.getSymbole() == "<CHAINE>") {
+            instEcrire = m_table.chercheAjoute(m_lecteur.getSymbole());
+            m_lecteur.avancer();
+        }
+    }
+
     testerEtAvancer(")");
     return instEcrire;
 }
