@@ -119,10 +119,8 @@ class NoeudInstEcrire: public Noeud {
     NoeudInstEcrire();
      // Construit une "instruction ecrire" avec sa condition et sa séquence d'instruction
     ~NoeudInstEcrire(); // A cause du destructeur virtuel de la classe Noeud
-    void ajouter(Noeud* instruction);
     int executer();  // Exécute l'instruction ecrire
     
-
   private:
       vector<Noeud*> m_vecteurEcrire;
 };
