@@ -1,6 +1,7 @@
 #include "Interpreteur.h"
 #include <stdlib.h>
 #include <iostream>
+#include <typeinfo>
 using namespace std;
 
 Interpreteur::Interpreteur(ifstream & fichier) :
@@ -174,19 +175,23 @@ Noeud* Interpreteur::instRepeter() {
 }
 
 Noeud* Interpreteur::instPour() {
-    //<repeter> ::= repeter <seqInst> jusqua( <expression> )    
+    //<pour> ::= pour([<affectation>]  <expression>;[<affectation>]) <seqInst>finpour   
     testerEtAvancer("pour");
     testerEtAvancer("(");
-    Noeud* affecter = affectation(); // On mémorise l'affectation
-    testerEtAvancer(";");
+    
+    
+    if (typeid(m_lecteur.getSymbole()).name() == typeid(NoeudAffectation).name()){
+        Noeud* affecter = affectation(); // On mémorise l'affectation si elle existe
+        testerEtAvancer(";");
+    }
     Noeud* condition = expression(); // On mémorise la condition
-    testerEtAvancer(";");
-    Noeud* action = affectation(); // On mémorise l'action de fin de boucle
+    if (m_lecteur.getSymbole() == ";"){
+        testerEtAvancer(";");
+        Noeud* action = affectation(); // On mémorise l'action si elle existe
+    }
     testerEtAvancer(")");
     Noeud* sequence = seqInst();
     testerEtAvancer("finpour");
-
-    return nullptr;
 }
 
 Noeud* Interpreteur::instEcrire() {

@@ -111,6 +111,24 @@ class NoeudInstRepeter: public Noeud {
     Noeud*  m_sequence;
 };
 ////////////////////////////////////////////////////////////////////////////////
+class NoeudInstPour: public Noeud {
+// Classe pour représenter un noeud "instruction pour"
+//  et ses 4 fils : l'affectation, la condition de sortie, l'action a faire en fin de boucle, et la sequence d'actions a repeter
+  public:
+    NoeudInstPour(Noeud* condition, Noeud* sequence,Noeud* affecter, Noeud* action);
+     // Construit une "instruction tantque" avec sa condition et sa séquence d'instruction, affecter et action sont a la fin afin d'avoir des valeurs par défaut
+    ~NoeudInstPour() {} // A cause du destructeur virtuel de la classe Noeud
+    int executer();  // Exécute l'instruction tantque : tantque condition vraie on exécute la séquence
+
+  private:
+    Noeud*  m_affecter;
+    Noeud*  m_condition;
+    Noeud*  m_action;
+    Noeud*  m_sequence;
+};
+
+
+////////////////////////////////////////////////////////////////////////////////
 class NoeudInstEcrire: public Noeud {
 // Classe pour représenter un noeud "instruction ecrire"
 //    <instEcrire>  ::= ecrire( <expression> | <chaine> {, <expression> | <chaine> })

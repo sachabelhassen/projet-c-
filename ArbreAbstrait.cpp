@@ -108,6 +108,33 @@ int NoeudInstRepeter::executer() {
     } while (!(m_condition->executer()));
     return 0; // La valeur renvoyée ne représente rien !
 }
+////////////////////////////////////////////////////////////////////////////////
+// NoeudPour
+////////////////////////////////////////////////////////////////////////////////
+
+NoeudInstPour::NoeudInstPour(Noeud* affecter, Noeud* condition, Noeud* action, Noeud* sequence)
+:m_affecter(affecter), m_condition(condition), m_action(action), m_sequence(sequence) {   
+}
+
+int NoeudInstPour::executer() {
+    /*if(m_affecter){
+        if(m_action){
+            for (m_affecter->executer();m_condition->executer();m_action->executer()){
+                m_sequence->executer();
+            }
+        }
+        else {for()
+     }
+    if(m_action== NoeudAffectation){}*/
+    
+    return 0; // La valeur renvoyée ne représente rien !
+    for ((m_affecter ? m_affecter->executer() : 0);
+         m_condition->executer();
+         (m_action ? m_action->executer() : 0)){
+        m_sequence->executer();
+    }
+
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudEcrire
