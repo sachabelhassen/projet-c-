@@ -112,20 +112,20 @@ int NoeudInstRepeter::executer() {
 // NoeudEcrire
 ////////////////////////////////////////////////////////////////////////////////
 
-NoeudInstEcrire::NoeudInstEcrire(){
+NoeudInstEcrire::NoeudInstEcrire(vector<Noeud*> noeuds)
+: m_vecteurEcrire(noeuds){
 }
 
-NoeudInstEcrire::~NoeudInstEcrire() {
-
+int NoeudInstEcrire::executer(){  
+    for(auto p : m_vecteurEcrire){
+	if (typeid(*p)==typeid(SymboleValue) &&  *((SymboleValue*)p)== "<CHAINE>") {
+	    const string& chaine = ((SymboleValue*)p)->getChaine();
+	    cout << chaine;
+	}
+	else cout << p->executer();
+    }
 }
 
-int NoeudInstEcrire::executer() {
-
-}
-
-void NoeudInstEcrire::ajouter(Noeud* instruction) {
-    m_vecteurEcrire.push_back(instruction);
-}
 
 
 
