@@ -119,6 +119,7 @@ class NoeudInstEcrire: public Noeud {
     NoeudInstEcrire();
      // Construit une "instruction ecrire" 
     ~NoeudInstEcrire(); // A cause du destructeur virtuel de la classe Noeud
+    void ajoute(Noeud* parametre);
     int executer();  // Exécute l'instruction ecrire
     
   private:

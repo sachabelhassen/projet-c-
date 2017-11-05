@@ -120,13 +120,18 @@ NoeudInstEcrire::NoeudInstEcrire()
 }
 
 
-int NoeudInstEcrire::executer(){  
-    for(auto p : m_vecteurEcrire){
-	if (typeid(*p)==typeid(SymboleValue) &&  *((SymboleValue*)p)== "<CHAINE>") {
-	    const string& chaine = ((SymboleValue*)p)->getChaine();
-	    cout << chaine;
-	}
-	else cout << p->executer();
+void NoeudInstEcrire::ajoute(Noeud* parametre) {
+    m_vecteurEcrire.push_back(parametre);
+}
+
+int NoeudInstEcrire::executer() {
+    for (auto param : m_vecteurEcrire) {
+        if ( (typeid(*param)==typeid(SymboleValue)) && *((SymboleValue*)param)=="<CHAINE>" ) {
+            string chaine = ((SymboleValue*)param)->getChaine();
+            cout << chaine.substr(1,chaine.size()-2);
+        } else {
+           cout << param->executer();
+        }
     }
     return 0;
 }

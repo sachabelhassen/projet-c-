@@ -59,7 +59,8 @@ Noeud* Interpreteur::seqInst() {
     } while (m_lecteur.getSymbole() == "<VARIABLE>"
             || m_lecteur.getSymbole() == "si"
             || m_lecteur.getSymbole() == "tantque"
-            || m_lecteur.getSymbole() == "repeter");
+            || m_lecteur.getSymbole() == "repeter"
+            || m_lecteur.getSymbole() == "ecrire");
     // Tant que le symbole courant est un début possible d'instruction...
     // Il faut compléter cette condition chaque fois qu'on rajoute une nouvelle instruction
     return sequence;
@@ -80,6 +81,8 @@ Noeud* Interpreteur::inst() {
         Noeud *repeter = instRepeter();
         testerEtAvancer(";");
         return repeter;
+    } else if (m_lecteur.getSymbole() == "ecrire") {
+        return instEcrire();
     } else erreur("Instruction incorrecte");
 }
 
@@ -184,28 +187,31 @@ Noeud* Interpreteur::instPour() {
 }
 
 Noeud* Interpreteur::instEcrire() {
-    //       <instEcrire>  ::= ecrire( <expression> | <chaine> {, <expression> | <chaine> })
-    Noeud* maChaine = nullptr;
+    // <instEcrire>::= ecrire (<expression> | <chaine> { , <excpresison> | <chaine> } )
     testerEtAvancer("ecrire");
     testerEtAvancer("(");
-    if (expression()) {
-        maChaine->ajoute(expression());
-    } else if (m_lecteur.getSymbole() == "<CHAINE>") {
-        maChaine = m_table.chercheAjoute(m_lecteur.getSymbole()); // on ajoute la chaine à la table
+    NoeudInstEcrire * chaineEcrire = new NoeudInstEcrire();
+    Noeud *parametre;
+    string chaine;
+    if (m_lecteur.getSymbole() == "<CHAINE>") {
+        parametre = m_table.chercheAjoute(m_lecteur.getSymbole());
         m_lecteur.avancer();
+    } else {
+        parametre = expression();
     }
-
+    chaineEcrire->ajoute(parametre);
     while (m_lecteur.getSymbole() == ",") {
-        if (expression()) {
-            maChaine->ajoute(expression());
-        } else if (m_lecteur.getSymbole() == "<CHAINE>") {
-            maChaine = m_table.chercheAjoute(m_lecteur.getSymbole());
+        m_lecteur.avancer();
+        if (m_lecteur.getSymbole() == "<CHAINE>") {
+            parametre = m_table.chercheAjoute(m_lecteur.getSymbole());
             m_lecteur.avancer();
+        } else {
+            parametre = expression();
         }
+        chaineEcrire->ajoute(parametre);
     }
-
     testerEtAvancer(")");
-    return maChaine;
+    return chaineEcrire;
 }
 
 Noeud* Interpreteur::instSiRiche() {

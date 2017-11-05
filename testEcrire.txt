@@ -1,0 +1,6 @@
+
+#testecrire
+procedure principale()
+	i= 1234;
+	ecrire("i = ",i)
+finproc
