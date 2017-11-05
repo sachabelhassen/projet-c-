@@ -185,27 +185,27 @@ Noeud* Interpreteur::instPour() {
 
 Noeud* Interpreteur::instEcrire() {
     //       <instEcrire>  ::= ecrire( <expression> | <chaine> {, <expression> | <chaine> })
-    Noeud* instEcrire = nullptr;
+    Noeud* maChaine = nullptr;
     testerEtAvancer("ecrire");
     testerEtAvancer("(");
     if (expression()) {
-        instEcrire->ajoute(expression());
+        maChaine->ajoute(expression());
     } else if (m_lecteur.getSymbole() == "<CHAINE>") {
-        instEcrire = m_table.chercheAjoute(m_lecteur.getSymbole()); // on ajoute la chaine à la table
+        maChaine = m_table.chercheAjoute(m_lecteur.getSymbole()); // on ajoute la chaine à la table
         m_lecteur.avancer();
     }
 
     while (m_lecteur.getSymbole() == ",") {
         if (expression()) {
-            instEcrire->ajoute(expression());
+            maChaine->ajoute(expression());
         } else if (m_lecteur.getSymbole() == "<CHAINE>") {
-            instEcrire = m_table.chercheAjoute(m_lecteur.getSymbole());
+            maChaine = m_table.chercheAjoute(m_lecteur.getSymbole());
             m_lecteur.avancer();
         }
     }
 
     testerEtAvancer(")");
-    return instEcrire;
+    return maChaine;
 }
 
 Noeud* Interpreteur::instSiRiche() {

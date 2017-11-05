@@ -3,7 +3,8 @@
 #include "Symbole.h"
 #include "SymboleValue.h"
 #include "Exceptions.h"
-
+#include <typeinfo>
+#include <vector>
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudSeqInst
 ////////////////////////////////////////////////////////////////////////////////
@@ -112,9 +113,12 @@ int NoeudInstRepeter::executer() {
 // NoeudEcrire
 ////////////////////////////////////////////////////////////////////////////////
 
-NoeudInstEcrire::NoeudInstEcrire(vector<Noeud*> noeuds)
-: m_vecteurEcrire(noeuds){
+
+NoeudInstEcrire::NoeudInstEcrire() 
+: m_vecteurEcrire(){
+
 }
+
 
 int NoeudInstEcrire::executer(){  
     for(auto p : m_vecteurEcrire){
@@ -124,6 +128,11 @@ int NoeudInstEcrire::executer(){
 	}
 	else cout << p->executer();
     }
+    return 0;
+}
+
+NoeudInstEcrire::~NoeudInstEcrire() {
+
 }
 
 

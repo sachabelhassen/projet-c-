@@ -116,7 +116,7 @@ class NoeudInstEcrire: public Noeud {
 //    <instEcrire>  ::= ecrire( <expression> | <chaine> {, <expression> | <chaine> })
 
   public:
-    NoeudInstEcrire(vector<Noeud*> noeuds);
+    NoeudInstEcrire();
      // Construit une "instruction ecrire" 
     ~NoeudInstEcrire(); // A cause du destructeur virtuel de la classe Noeud
     int executer();  // Exécute l'instruction ecrire
