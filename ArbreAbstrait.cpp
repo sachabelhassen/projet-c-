@@ -136,9 +136,6 @@ int NoeudInstEcrire::executer() {
     return 0;
 }
 
-NoeudInstEcrire::~NoeudInstEcrire() {
-
-}
 
 
 
@@ -165,5 +162,24 @@ int NoeudInstSiRiche::executer() {
         m_vecteurConditonInstruction[i + 1]->executer();
     else if (nb % 2)
         m_vecteurConditonInstruction[nb - 1]->executer();
+    return 0;
+}
+////////////////////////////////////////////////////////////////////////////////
+// NoeudLire
+////////////////////////////////////////////////////////////////////////////////
+
+NoeudInstLire::NoeudInstLire() {
+}
+
+void NoeudInstLire::ajoute(Noeud* variable) {
+    m_varLire.push_back(variable);
+}
+
+int NoeudInstLire::executer() {
+    for (auto var : m_varLire) {
+        int val;
+        cin >> val;
+        ((SymboleValue*) var)->setValeur(val);
+    }
     return 0;
 }

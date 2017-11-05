@@ -118,7 +118,7 @@ class NoeudInstEcrire: public Noeud {
   public:
     NoeudInstEcrire();
      // Construit une "instruction ecrire" 
-    ~NoeudInstEcrire(); // A cause du destructeur virtuel de la classe Noeud
+    ~NoeudInstEcrire(){}// A cause du destructeur virtuel de la classe Noeud
     void ajoute(Noeud* parametre);
     int executer();  // Exécute l'instruction ecrire
     
@@ -127,7 +127,7 @@ class NoeudInstEcrire: public Noeud {
 };
 ////////////////////////////////////////////////////////////////////////////////
 class NoeudInstSiRiche: public Noeud {
-// Classe pour représenter un noeud "instruction ecrire"
+// Classe pour représenter un noeud "instruction siRiche"
 //    <instEcrire>  ::= ecrire( <expression> | <chaine> {, <expression> | <chaine> })
 
   public:
@@ -142,4 +142,19 @@ class NoeudInstSiRiche: public Noeud {
       vector<Noeud*> m_vecteurConditonInstruction;
 
 };
+////////////////////////////////////////////////////////////////////////////////
+class NoeudInstLire:public Noeud{
+    // <instLire>::= lire ( <variable> {,<variable>} )
+public:
+    NoeudInstLire();
+    int executer() override;
+    void ajoute(Noeud* variable) override;
+    virtual ~NoeudInstLire() {}
+    
+private:
+    vector<Noeud*> m_varLire;
+};
+
+
+
 #endif /* ARBREABSTRAIT_H */
