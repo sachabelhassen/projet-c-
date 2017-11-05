@@ -1,7 +1,7 @@
 # Fichier de test
 # Les lignes de commentaires commencent par #
 procedure principale()
-  i = 12;
+  i = 1;
   ecrire("Entrer j : ")
   lire(j)
   ecrire("i = ", i, " j = ",j)
