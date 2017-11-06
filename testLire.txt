@@ -4,7 +4,7 @@ procedure principale()
   i = 1;
   ecrire("Entrer j : ");
   lire(j);
-  ecrire("i = ", i, " j = ",j)
+  ecrire("i = ", i, " j = ",j);
   i=i+1;
   ecrire(i);
 finproc

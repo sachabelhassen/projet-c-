@@ -23,3 +23,8 @@ ostream & operator<<(ostream & cout, const SymboleValue & symbole) {
   else cout << "indefinie ";
   return cout;
 }
+
+void SymboleValue::traduitEnCPP(std::ostream& sortie, unsigned int indentation) const {
+    sortie << this->getChaine();
+}
+

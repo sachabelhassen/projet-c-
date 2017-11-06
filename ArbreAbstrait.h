@@ -7,6 +7,7 @@
 #include <vector>
 #include <iostream>
 #include <iomanip>
+#include <typeinfo>
 using namespace std;
 
 #include "Symbole.h"
@@ -21,7 +22,7 @@ class Noeud {
     virtual void ajoute(Noeud* instruction) { throw OperationInterditeException(); }
     virtual ~Noeud() {} // Présence d'un destructeur virtuel conseillée dans les classes abstraites
     virtual void traduitEnCPP(std::ostream & sortie, unsigned int indentation) const {
-        cout << setw(indentation*4) << "" << "traduit en CPP pas défini pour la classe "<<typeid(*this).name() << endl;
+        sortie << setw(indentation*4) << "" << "traduit en CPP pas défini pour la classe "<<typeid(*this).name() << endl;
     }
 };
 
