@@ -61,6 +61,7 @@ Noeud* Interpreteur::seqInst() {
             || m_lecteur.getSymbole() == "si"
             || m_lecteur.getSymbole() == "tantque"
             || m_lecteur.getSymbole() == "repeter"
+            || m_lecteur.getSymbole() == "pour"
             || m_lecteur.getSymbole() == "ecrire"
             || m_lecteur.getSymbole() == "lire");
     // Tant que le symbole courant est un début possible d'instruction...
@@ -82,7 +83,9 @@ Noeud* Interpreteur::inst() {
     } else if (m_lecteur.getSymbole() == "repeter") {
         Noeud *repeter = instRepeter();
         testerEtAvancer(";");
-        return repeter;
+        return repeter;  
+    } else if (m_lecteur.getSymbole() == "pour") {
+        return instPour();
     } else if (m_lecteur.getSymbole() == "ecrire") {
         return instEcrire();
     } else if (m_lecteur.getSymbole() == "lire") {
