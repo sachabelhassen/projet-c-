@@ -3,6 +3,7 @@
 procedure principale()
     i = 12+3;
     y = 0;
+    ecrire(i);
     pour(i=0;i<20;i=i+1)
         y=y+i*2;
     finpour

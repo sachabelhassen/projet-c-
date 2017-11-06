@@ -71,26 +71,47 @@ Noeud* Interpreteur::seqInst() {
 
 Noeud* Interpreteur::inst() {
     // <inst> ::= <affectation>  ; | <instSi>
-    if (m_lecteur.getSymbole() == "<VARIABLE>") {
-        Noeud *affect = affectation();
-        testerEtAvancer(";");
-        return affect;
-    } else if (m_lecteur.getSymbole() == "si") {
-        return instSiRiche();
-        // Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
-    } else if (m_lecteur.getSymbole() == "tantque") {
-        return instTantQue();
-    } else if (m_lecteur.getSymbole() == "repeter") {
-        Noeud *repeter = instRepeter();
-        testerEtAvancer(";");
-        return repeter;  
-    } else if (m_lecteur.getSymbole() == "pour") {
-        return instPour();
-    } else if (m_lecteur.getSymbole() == "ecrire") {
-        return instEcrire();
-    } else if (m_lecteur.getSymbole() == "lire") {
-        return instLire();
-    } else erreur("Instruction incorrecte");
+    try{
+        if (m_lecteur.getSymbole() == "<VARIABLE>") {
+            Noeud *affect = affectation();
+            testerEtAvancer(";");
+            return affect;
+        } else if (m_lecteur.getSymbole() == "si") {
+            return instSiRiche();
+            // Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
+        } else if (m_lecteur.getSymbole() == "tantque") {
+            return instTantQue();
+        } else if (m_lecteur.getSymbole() == "repeter") {
+            Noeud *repeter = instRepeter();
+            testerEtAvancer(";");
+            return repeter;  
+        } else if (m_lecteur.getSymbole() == "pour") {
+            return instPour();
+        } else if (m_lecteur.getSymbole() == "ecrire") {
+            Noeud *ecrire = instEcrire();
+            testerEtAvancer(";");
+            return ecrire;
+        } else if (m_lecteur.getSymbole() == "lire") {
+            Noeud *lire= instLire();
+            testerEtAvancer(";");
+            return lire;
+        } else erreur("Instruction incorrecte");
+    }
+    catch (exception & e){
+        cout << "Exception" <<e.what()<< endl;
+        m_arbre = nullptr;
+        while(m_lecteur.getSymbole() != "<VARIABLE>"
+            && m_lecteur.getSymbole() != "si"
+            && m_lecteur.getSymbole() != "tantque"
+            && m_lecteur.getSymbole() != "repeter"
+            && m_lecteur.getSymbole() != "pour"
+            && m_lecteur.getSymbole() != "ecrire"
+            && m_lecteur.getSymbole() != "lire"
+            && m_lecteur.getSymbole() != "<FINDEFICHIER>")
+        {
+            m_lecteur.avancer();
+        }
+    }
 }
 
 Noeud* Interpreteur::affectation() {
@@ -202,7 +223,7 @@ Noeud* Interpreteur::instPour() {
         affecter = affectation();
     }    
     testerEtAvancer(";");
-    tester("<VARAIBLE>");
+    tester("<VARIABLE>");
     Noeud* condition = expression();
     testerEtAvancer(";");
     Noeud* action = nullptr;
@@ -210,7 +231,7 @@ Noeud* Interpreteur::instPour() {
         action = affectation();
     }
     testerEtAvancer(")");
-    Noeud sequence = seqInst();
+    Noeud* sequence = seqInst();
     testerEtAvancer("finpour");
     return new NoeudInstPour(affecter,condition,action,sequence);
 
