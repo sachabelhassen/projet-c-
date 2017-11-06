@@ -3,8 +3,8 @@
 #include "Symbole.h"
 #include "SymboleValue.h"
 #include "Exceptions.h"
-#include <typeinfo>
 #include <vector>
+#include <typeinfo>
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudSeqInst
 ////////////////////////////////////////////////////////////////////////////////
@@ -21,6 +21,16 @@ int NoeudSeqInst::executer() {
 void NoeudSeqInst::ajoute(Noeud* instruction) {
     if (instruction != nullptr) m_instructions.push_back(instruction);
 }
+
+void NoeudSeqInst::traduitEnCPP(ostream& sortie, unsigned int indentation) const {
+    for(auto instr: m_instructions){
+        instr->traduitEnCPP(sortie, indentation);
+        if(typeid(*instr)== typeid(*NoeudAffectation))
+    
+    }
+}
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudAffectation
@@ -127,12 +137,13 @@ int NoeudInstPour::executer() {
      }
     if(m_action== NoeudAffectation){}*/
     
-    return 0; // La valeur renvoyée ne représente rien !
-    for ((m_affecter ? m_affecter->executer() : 0);
+    
+    for ((m_affecter==nullptr ? 0:m_affecter->executer());
          m_condition->executer();
-         (m_action ? m_action->executer() : 0)){
+         (m_action==nullptr ? 0:m_action->executer())){
         m_sequence->executer();
     }
+    return 0; // La valeur renvoyée ne représente rien !
 
 }
 
