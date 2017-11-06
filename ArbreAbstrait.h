@@ -81,7 +81,6 @@ class NoeudInstSi : public Noeud {
      // Construit une "instruction si" avec sa condition et sa séquence d'instruction
    ~NoeudInstSi() {} // A cause du destructeur virtuel de la classe Noeud
     int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence
-    void traduitEnCPP(std::ostream & sortie, unsigned int indentation) const;
 
   private:
     Noeud*  m_condition;
