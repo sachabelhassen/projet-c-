@@ -179,7 +179,7 @@ Noeud* Interpreteur::instRepeter() {
 
 Noeud* Interpreteur::instPour() {
     //<pour> ::= pour([<affectation>]  <expression>;[<affectation>]) <seqInst>finpour   
-    testerEtAvancer("pour");
+    /*testerEtAvancer("pour");
     testerEtAvancer("(");
     
     
@@ -194,7 +194,26 @@ Noeud* Interpreteur::instPour() {
     }
     testerEtAvancer(")");
     Noeud* sequence = seqInst();
+    testerEtAvancer("finpour");*/
+    testerEtAvancer("pour");
+    testerEtAvancer("(");
+    Noeud* affecter = nullptr;
+    if (m_lecteur.getSymbole()=="<VARIABLE>"){
+        affecter = affectation();
+    }    
+    testerEtAvancer(";");
+    tester("<VARAIBLE>");
+    Noeud* condition = expression();
+    testerEtAvancer(";");
+    Noeud* action = nullptr;
+    if (m_lecteur.getSymbole()=="<VARIABLE>"){
+        action = affectation();
+    }
+    testerEtAvancer(")");
+    Noeud sequence = seqInst();
     testerEtAvancer("finpour");
+    return new NoeudInstPour(affecter,condition,action,sequence);
+
 }
 
 Noeud* Interpreteur::instEcrire() {
